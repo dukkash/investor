@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+		<meta name="description" content="dashboard">
+		<meta name="author" content="dukkash">
+
+		<title>Investor - Add Quarterly Data</title>
+
+		<link href="css/bootstrap.min.css" rel="stylesheet">
+		<link href="css/dashboard.css" rel="stylesheet">
+	</head>
+
+	<body>
+		<header>
+			<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+				<a class="navbar-brand" href="#" style="color:red">INVESTOR</a>
+
+				<div class="collapse navbar-collapse" id="navbarsExampleDefault">
+					<ul class="navbar-nav mr-auto">
+						<li class="nav-item">
+							<a class="nav-link" href="/investor/index.html">Home <span class="sr-only">(current)</span></a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/investor/settings.html">Settings</a>
+						</li>
+					</ul>
+					<form class="form-inline mt-2 mt-md-0">
+						<input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search"
+							   id="search-area">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="search-btn">Search</button>
+					</form>
+				</div>
+			</nav>
+		</header>
+
+		<div class="container-fluid">
+			<div class="row">
+				<nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
+					<ul class="nav nav-pills flex-column">
+						<li class="nav-item">
+							<a class="nav-link" href="/investor/index.html">Overview</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="/investor/companies.html?exchange=TR">Companies</a>
+						</li>
+					</ul>
+
+					<ul class="nav nav-pills flex-column">
+						<li class="nav-item">
+							<a class="nav-link" href="/investor/addCompany.html">Add Company</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link active" href="/investor/addQuarterlyData.html">Add Quarterly Data<span class="sr-only">(current)</span></a>
+						</li>
+					</ul>
+				</nav>
+
+				<main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
+					<h1>Add Company</h1>
+
+					<div class="container" style="margin-left: 5px;">
+						<br>
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="name">Quarter Name*</label>
+								<div class="col-md-5">
+									<input id="name" name="name" type="text"
+										placeholder="YYYY-Q[1,2,3 or 4]" class="form-control input-md"
+										required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="ticker-symbol">Ticker Symbol*</label>
+								<div class="col-md-5">
+									<input id="ticker-symbol" name="ticker-symbol" type="text"
+										class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="shares">Shares Outstanding*</label>
+								<div class="col-md-5">
+									<input id="shares" name="shares" type="text" placeholder="000"
+										class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="earnings-date">Earnings Date</label>
+								<div class="col-md-5">
+									<input id="earnings-date" name="earnings-date" type="date" placeholder="DD.MM.YYYY" class="form-control input-md"
+										required="">
+								</div>
+							</div>
+
+							</br>
+							<div class="form-group row">
+								<label class="col-md-4 control-label"><b>BALANCE SHEET</b></label>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="total-assets">Total Assets*</label>
+								<div class="col-md-5">
+									<input id="total-assets" name="total-assets" type="text"
+										placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="current-assets">Total Current Assets*</label>
+								<div class="col-md-5">
+									<input id="current-assets" name="current-assets" type="text"
+										placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="total-liabilities">Total Liabilities*</label>
+								<div class="col-md-5">
+									<input id="total-liabilities" name="total-liabilities"
+										type="text" placeholder="000" class="form-control input-md"
+										required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="current-liabilities">Total Current Liabilities*</label>
+								<div class="col-md-5">
+									<input id="current-liabilities" name="current-liabilities"
+										type="text" placeholder="000" class="form-control input-md"
+										required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="inventories">Inventories</label>
+								<div class="col-md-5">
+									<input id="inventories" name="inventories" type="text"
+										placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label"
+									for="property-plant-equipment">Property, Plant and Equipment</label>
+								<div class="col-md-5">
+									<input id="property-plant-equipment" name="property-plant-equipment" type="text" placeholder="000"
+										class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="short-term-debt">Short Term Debt*</label>
+								<div class="col-md-5">
+									<input id="short-term-debt" name="short-term-debt" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="long-term-debt">Long Term Debt*</label>
+								<div class="col-md-5">
+									<input id="long-term-debt" name="long-term-debt" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="trade-receivables">Trade Receivables</label>
+								<div class="col-md-5">
+									<input id="trade-receivables" name="trade-receivables" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label" for="other-receivables">Other Receivables</label>
+                                <div class="col-md-5">
+                                    <input id="other-receivables" name="other-receivables" type="text" placeholder="000" class="form-control input-md" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label" for="trade-payables">Trade Payables</label>
+                                <div class="col-md-5">
+                                    <input id="trade-payables" name="trade-payables" type="text" placeholder="000" class="form-control input-md" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label" for="other-payables">Other Payables</label>
+                                <div class="col-md-5">
+                                    <input id="other-payables" name="other-payables" type="text" placeholder="000" class="form-control input-md" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label" for="prepayments">Prepayments</label>
+                                <div class="col-md-5">
+                                    <input id="prepayments" name="prepayments" type="text" placeholder="000" class="form-control input-md" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label" for="intangible-assets">Intangible Assets</label>
+                                <div class="col-md-5">
+                                    <input id="intangible-assets" name="intangible-assets" type="text" placeholder="000" class="form-control input-md" required="">
+                                </div>
+                            </div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="cash">Cash*</label>
+								<div class="col-md-5">
+									<input id="cash" name="cash" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="loans">Loans</label>
+								<div class="col-md-5">
+									<input id="loans" name="loans" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="deposits">Deposits</label>
+								<div class="col-md-5">
+									<input id="deposits" name="deposits" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+
+							</br>
+							<div class="form-group row">
+								<label class="col-md-4 control-label"><b>INCOME STATEMENT</b></label>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="revenue">Total Revenue*</label>
+								<div class="col-md-5">
+									<input id="revenue" name="revenue" type="text"
+										placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="gross-profit">Gross Profit*</label>
+								<div class="col-md-5">
+									<input id="gross-profit" name="gross-profit" type="text"
+										placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="operational-profit">Operational Profit/EBIT*</label>
+								<div class="col-md-5">
+									<input id="operational-profit" name="operational-profit"
+										type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="finance-income">Finance Income*</label>
+								<div class="col-md-5">
+									<input id="finance-income" name="finance-income" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="finance-cost">Finance Cost*</label>
+								<div class="col-md-5">
+									<input id="finance-cost" name="finance-cost" type="text" placeholder="000" class="form-control input-md"	required="">
+								</div>
+							</div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label" for="interest-income">Interest Income</label>
+                                <div class="col-md-5">
+                                    <input id="interest-income" name="interest-income" type="text"
+                                           placeholder="000" class="form-control input-md" required="">
+                                </div>
+                            </div>
+
+                            <div class="form-group row">
+                                <label class="col-md-4 control-label" for="interest-expenses">Interest Expenses</label>
+                                <div class="col-md-5">
+                                    <input id="interest-expenses" name="interest-expenses"
+                                           type="text" placeholder="000" class="form-control input-md"	required="">
+                                </div>
+                            </div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="tax-expenses">Tax Expenses*</label>
+								<div class="col-md-5">
+									<input id="tax-expenses" name="tax-expenses" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="net-profit">Net Profit*</label>
+								<div class="col-md-5">
+									<input id="net-profit" name="net-profit" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="non-interest-income">Non	Interest Income</label>
+								<div class="col-md-5">
+									<input id="non-interest-income" name="non-interest-income"
+										type="text" placeholder="000" class="form-control input-md"	required="">
+								</div>
+							</div>
+
+							</br>
+							<div class="form-group row">
+								<label class="col-md-4 control-label"><b>CASH FLOW</b></label>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label"
+									for="operating-activities-cash">Cash From Operating Activities</label>
+								<div class="col-md-5">
+									<input id="operating-activities-cash" name="operating-activities-cash" type="text" placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label"
+									for="investing-activities-cash">Cash From Investing	Activities</label>
+								<div class="col-md-5">
+									<input id="investing-activities-cash" name="investing-activities-cash" type="text" placeholder="000"
+										class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label"
+									for="financial-activities-cash">Cash From Financial
+									Activities</label>
+								<div class="col-md-5">
+									<input id="financial-activities-cash"
+										name="financial-activities-cash" type="text" placeholder="000"
+										class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="dividend-payments">Dividend
+									Payments</label>
+								<div class="col-md-5">
+									<input id="dividend-payments" name="dividend-payments"
+										type="text" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="debt-payments">Debt
+									Payments</label>
+								<div class="col-md-5">
+									<input id="debt-payments" name="debt-payments" type="text"
+										placeholder="000" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="debt-issued">Debt
+									Issued</label>
+								<div class="col-md-5">
+									<input id="debt-issued" name="debt-issued" type="text"
+										class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="interest-payments">Interest
+									Payments</label>
+								<div class="col-md-5">
+									<input id="interest-payments" name="interest-payments"
+										type="text" class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="liquidity">Liquidity</label>
+								<div class="col-md-5">
+									<input id="liquidity" name="liquidity" type="text"
+										class="form-control input-md" required="">
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="notes">Notes</label>
+								<div class="col-md-4">
+									<textarea class="form-control" id="notes" name="notes"></textarea>
+								</div>
+							</div>
+
+							<div class="form-group row">
+								<label class="col-md-4 control-label" for="add-quarter-btn"></label>
+								<div class="col-md-8">
+									<button id="add-quarter-btn" name="add-quarter-btn" class="btn btn-success">ADD QUARTERLY DATA</button>
+									<button id="reset-quarter-btn" name="reset-quarter-btn" class="btn btn-danger">RESET</button>
+								</div>
+							</div>
+					</form>
+				</div>
+			</main>
+		</div>
+	</div>
+
+	<script src="js/jquery-3.2.1.js"></script>
+	<script src="js/popper.js"></script>
+	<script src="js/bootstrap.js"></script>
+	<script src="js/search.js"></script>
+	<script src="js/add-quarterly-data.js"/></script>
+</body>
+</html>
+

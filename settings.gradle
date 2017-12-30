@@ -1,0 +1,8 @@
+rootProject.name = 'investor'
+include 'backend'
+findProject(':backend')?.name = 'investor'
+rootProject.name = 'investor'
+include 'backend'
+findProject(':backend')?.name = 'investor'
+rootProject.name = 'investor'
+
