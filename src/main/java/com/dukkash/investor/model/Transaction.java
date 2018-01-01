@@ -23,12 +23,17 @@ public class Transaction {
     private String description;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "source_account", referencedColumnName = "ID")
-    private Account sourceAccount;
+    @JoinColumn(name = "account_id", referencedColumnName = "ID")
+    private Account account;
+
+    @Column(name = "is_debit", columnDefinition="BIT")
+    private Boolean isDebit;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "destination_account", referencedColumnName = "ID")
-    private Account destinationAccount;
+    @JoinColumn(name = "transaction_type_id", referencedColumnName = "ID")
+    private TransactionType transactionType;
+
+    public Transaction(){}
 
     public Integer getId() {
         return id;
@@ -62,19 +67,27 @@ public class Transaction {
         this.description = description;
     }
 
-    public Account getSourceAccount() {
-        return sourceAccount;
+    public Account getAccount() {
+        return account;
     }
 
-    public void setSourceAccount(Account sourceAccount) {
-        this.sourceAccount = sourceAccount;
+    public void setAccount(Account account) {
+        this.account = account;
     }
 
-    public Account getDestinationAccount() {
-        return destinationAccount;
+    public Boolean getDebit() {
+        return isDebit;
     }
 
-    public void setDestinationAccount(Account destinationAccount) {
-        this.destinationAccount = destinationAccount;
+    public void setDebit(Boolean debit) {
+        isDebit = debit;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
     }
 }

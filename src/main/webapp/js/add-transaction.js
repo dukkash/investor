@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-	$.get("http://localhost:8080/account/getAll", function(data, status) {
+	$.get("/investor/account/getAll", function(data, status) {
 		if (status == 'success') {
 			fillAccountFields(data);
 		} else {
@@ -8,12 +8,32 @@ $(document).ready(function() {
 		}
 	});
 
+	$.get("/investor/transaction/getTransactionTypes", function(data, status) {
+    		if (status == 'success') {
+    			fillTransactionTypeFields(data);
+    		} else {
+    			alert("No account found registered!");
+    		}
+    	});
+
 	$("#add-trans-btn").click(function(e) {
 		e.preventDefault();
 		addTransaction();
 	});
 
 });
+
+
+function fillTransactionTypeFields(data) {
+	var options = "";
+
+	for (var i = 0; i < data.length; i++) {
+		options += '<option value="' + data[i].id + '">' + data[i].name
+				+ '</option>';
+	}
+
+	$('#ttype').append(options);
+}
 
 function fillAccountFields(data) {
 	var options = "";
@@ -24,21 +44,21 @@ function fillAccountFields(data) {
 	}
 
 	$('#account').append(options);
-	$('#related-account').append(options);
 }
 
 function addTransaction() {
-
-	var accountVal = $('#account').val();
-	var relatedAccountVal = $('#related-account').val();
+	var account = $('#account').val();
+	var ttype = $('#ttype').val();
 	var amount = $('#amount').val();
 	var transDate = $('#transaction-date').val();
 	var description = $('#description').val();
-	var exchange = $('#exchange').val();
+	var isdebit = $('#isdebit').val();
 
-	if (accountVal == 0 || relatedAccountVal == 0) {
+	if (account == 0) {
 		alert("Please select an account!");
-	} else if (amount == '') {
+	} else if (ttype == 0) {
+     		alert("Please specify an t. type!");
+    } else if (amount == '') {
 		alert("Please specify an amount!");
 	} else if (transDate == '') {
 		alert("Please specify a transaction date!");
@@ -48,15 +68,14 @@ function addTransaction() {
 		var transactionObject = {
 			"amount" : amount,
 			"description": description,
-			"transactionDate": transDate,
-			"accountId": accountVal,
-			"relatedAccountId": relatedAccountVal,
-			"incoming": true,
-			"exchange": exchange
+			"date": transDate,
+			"account": account,
+			"transactionType": ttype,
+			"isDebit": isdebit
 		};
 			
 		jQuery.ajax ({
-		    url: "/addTransactionEntity",
+		    url: "/investor/transaction/addTransaction",
 		    type: "POST",
 		    data: JSON.stringify(transactionObject),
 		    dataType: "json",

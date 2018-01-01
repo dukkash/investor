@@ -18,7 +18,7 @@ public class Account {
     @Column
     private String name;
 
-    @Column
+    @Column(name = "currency_code")
     private String currencyCode;
 
     @Column
