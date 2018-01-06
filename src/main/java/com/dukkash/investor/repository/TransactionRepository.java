@@ -2,7 +2,9 @@ package com.dukkash.investor.repository;
 
 import com.dukkash.investor.model.Transaction;
 import com.dukkash.investor.model.TransactionType;
+import com.dukkash.investor.ui.model.TransactionModel;
 import com.dukkash.investor.util.HibernateUtil;
+import org.hibernate.criterion.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -28,5 +30,9 @@ public class TransactionRepository {
 
     public void addTransaction(Transaction transaction) {
         hibernateUtil.getSession().save(transaction);
+    }
+
+    public List<Transaction> getAll() {
+        return hibernateUtil.getSession().createCriteria(Transaction.class).addOrder(Order.asc("date")).list();
     }
 }

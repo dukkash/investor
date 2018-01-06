@@ -6,6 +6,7 @@ import javax.validation.ValidationException;
 
 import com.dukkash.investor.exception.InvestorException;
 import com.dukkash.investor.model.*;
+import com.dukkash.investor.ui.model.ShortQuarter;
 import com.dukkash.investor.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -29,6 +30,43 @@ public class QuarterlyDataController {
 
 	@Autowired
 	private QuarterlyDataService quarterlyDataService;
+
+    @RequestMapping(value = "/addShortQuarterlyData", method = RequestMethod.POST)
+    public ResponseEntity<String> addShortQuarterlyData(@RequestBody ShortQuarter shortQuarter) {
+        QuarterlyData qData = new QuarterlyData();
+
+        try {
+            Company company = companyService.getCompanyByTickerSymbol(shortQuarter.getTickerSymbol().trim().toUpperCase());
+
+            if(company == null) {
+                throw new InvestorException("Company missing. " +  shortQuarter.getTickerSymbol());
+            }
+
+            qData.setCompany(company);
+            qData.setName(shortQuarter.getName());
+            qData.setNotes(shortQuarter.getNotes());
+            qData.setSharesOutstanding(shortQuarter.getShares());
+
+            BalanceSheet bSheet = new BalanceSheet();
+            qData.setBalanceSheet(bSheet);
+            bSheet.setEquity(shortQuarter.getEquity());
+            bSheet.setQuarterlyData(qData);
+
+            IncomeStatement iStat = new IncomeStatement();
+            qData.setIncomeStatement(iStat);
+            iStat.setRevenue(shortQuarter.getRevenue());
+            iStat.setNetProfit(shortQuarter.getNetProfit());
+            iStat.setQuarterlyData(qData);
+        } catch (InvestorException e) {
+            return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+
+        quarterlyDataService.save(qData);
+
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 
 	@RequestMapping(value = "/addQuarterlyData", method = RequestMethod.POST)
 	public ResponseEntity<String> addQuarterlyData(@RequestBody QuarterlyDataModel model) {

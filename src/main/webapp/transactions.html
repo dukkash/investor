@@ -6,21 +6,23 @@
     <meta name="description" content="dashboard">
     <meta name="author" content="dukkash">
 
-    <title>Investor - Dashboard</title>
+    <title>Investor - Transactions</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
+    <script src="js/highcharts.js"></script>
+    <script src="js/exporting.js"></script>
 </head>
 
 <body>
 <header>
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-        <a class="navbar-brand" href="#" style="color:red">INVESTOR</a>
+        <a class="navbar-brand" href="/investor/index.html" style="color:red">INVESTOR</a>
 
         <div class="collapse navbar-collapse" id="navbarsExampleDefault">
             <ul class="navbar-nav mr-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="/investor/index.html">Home <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/investor/index.html">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/investor/settings.html">Settings</a>
@@ -43,7 +45,7 @@
                     <a class="nav-link" href="/investor/index.html">Overview</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/investor/companies.html?exchange=TR">Companies<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/investor/companies.html?exchange=TR">Companies<span class="sr-only">(current)</span></a>
                 </li>
             </ul>
 
@@ -55,30 +57,42 @@
                     <a class="nav-link" href="/investor/addQuarterlyData.html">Add Quarterly Data</a>
                 </li>
             </ul>
+
+
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/investor/addTransaction.html">Add Transaction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" href="/investor/transactions.html">All Transactions</a>
+                </li>
+            </ul>
         </nav>
 
         <main role="main" class="col-sm-9 ml-sm-auto col-md-10 pt-3">
-            <h1>Companies</h1>
+            <h1>Transactions</h1>
 
-            <h2>Turkey</h2>
+
+                <div class="placeholder">
+                    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                </div>
+
+
+            <h2>All Transactions</h2>
+
             <div class="table-responsive">
                 <table class="table table-striped">
                     <thead>
                         <tr>
-                            <th style="text-align: LEFT;" >Name</th>
-                            <th style="text-align: right;" >Buy ind.</th>
-                            <th style="text-align: right;" >P/E</th>
-                            <th style="text-align: right;" >P/BV</th>
-                            <th style="text-align: right;" >Price</th>
-                            <th style="text-align: right;" >Market Cap.</th>
-                            <th style="text-align: right;" >Equity</th>
-                            <th style="text-align: right;" >T. Debt</th>
-                            <th style="text-align: right;" >Work. Capital</th>
-                            <th style="text-align: right;" >Net Cash</th>
-                            <th ></th>
+                            <th style="text-align: left;">Account</th>
+                            <th style="text-align: left;">Date</th>
+                            <th style="text-align: right;">Debit</th>
+                            <th style="text-align: right;">Credit</th>
+                            <th style="text-align: left;">Type</th>
+                            <th style="text-align: left;">Description</th>
                         </tr>
                     </thead>
-                    <tbody id="companies-tbody"/>
+                    <tbody id="transactions-tbody"/>
                 </table>
             </div>
         </main>
@@ -88,8 +102,11 @@
 <script src="js/jquery-3.2.1.js"></script>
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src="js/companies.js"></script>
+<script src="js/transactions.js"></script>
 <script src="js/search.js"></script>
+<script>
+
+</script>
 
 </body>
 </html>

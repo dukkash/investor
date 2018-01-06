@@ -4,15 +4,13 @@ import com.dukkash.investor.model.Transaction;
 import com.dukkash.investor.model.TransactionType;
 import com.dukkash.investor.service.AccountService;
 import com.dukkash.investor.service.TransactionService;
+import com.dukkash.investor.ui.model.CompanyModel;
 import com.dukkash.investor.ui.model.TransactionModel;
 import com.dukkash.investor.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.xml.bind.ValidationException;
 import java.util.List;
@@ -32,6 +30,10 @@ public class TransactionController {
         return transactionService.getAllTransactionTypes();
     }
 
+    @RequestMapping(value = "/getAll", method = RequestMethod.GET)
+    public List<Transaction> getAllCompanies(@RequestParam Integer accountId) {
+        return transactionService.getAll();
+    }
 
     @RequestMapping(value = "/addTransaction", method = RequestMethod.POST)
     public ResponseEntity<String> addTransaction(@RequestBody TransactionModel model) {

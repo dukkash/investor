@@ -33,9 +33,9 @@ function addCompanyToTable(data) {
 	var tableRow = "<tr id='" + data.symbol + "'>";
 
 	if(data.buyIndicator > 15) {
-	    tableRow += "<td align='left' style='color:red;'>" + data.tickerSymbol + " - " + data.name + "</td>";
+	    tableRow += "<td align='left' style='color:red;'><a href='/investor/company.html?symbol=" + data.tickerSymbol +"'>" +  data.tickerSymbol + " - " + data.name + "</a></td>";
 	} else {
-	   tableRow += "<td align='left' style='color:green;'>" + data.tickerSymbol + " - " + data.name + "</td>";
+	   tableRow += "<td align='left' style='color:green;'><a href='/investor/company.html?symbol=" + data.tickerSymbol +"'>" +  data.tickerSymbol + " - " + data.name + "</a></td>";
 	}
 	
 	if(data.buyIndicator > 22.5) {
@@ -49,14 +49,12 @@ function addCompanyToTable(data) {
     tableRow += data.priceEarning + "</td><td align='right'>";
 	tableRow += data.priceBook + "</td><td align='right' style='color:blue;'>";
 	tableRow += data.price + "</td><td align='right'>";
-	tableRow += formatValue(data.equity) + "</td><td align='right'>";
 	tableRow += formatValue(data.marketCap) + "</td><td align='right'>";
+	tableRow += formatValue(data.equity) + "</td><td align='right'>";
 	tableRow += formatValue(data.totalDebt) + "</td><td align='right'>";
 	tableRow += formatValue(data.workingCapital) + "</td><td align='right'>";
 	tableRow += formatValue(data.cash) + "</td><td align='right'>";
-	tableRow += "<a href='/investor/company.html?symbol=" + data.tickerSymbol
-	                + "'>Details</a> </td><td align='left'><a href='/investor/addCompanyNote.html?symbol="
-	                + data.tickerSymbol + "'>Add Note</a></td></tr>";
+	tableRow += "<a href='/investor/addCompanyNote.html?symbol=" + data.tickerSymbol + "'>Add Note</a></td></tr>";
 
 	return tableRow;
 }
