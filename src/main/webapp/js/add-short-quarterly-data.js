@@ -11,6 +11,8 @@ function addQuarterlyData() {
 	var shares = $('#shares').val().replace(/[,|.]/g, '').trim();
 	var revenue = $('#revenue').val().replace(/[,|.]/g, '').trim();
 	var netProfit = $('#net-profit').val().replace(/[,|.]/g, '').trim();
+	var tAssets = $('#t-assets').val().replace(/[,|.]/g, '').trim();
+	var tLiabilities = $('#t-liabilities').val().replace(/[,|.]/g, '').trim();
 	var equity = $('#equity').val().replace(/[,|.]/g, '').trim();
 	var notes = $('#notes').val();
 
@@ -24,9 +26,13 @@ function addQuarterlyData() {
 		alert("Field revenue cannot be empty!");
 	} else if (netProfit == '') {
       	alert("Field net profit cannot be empty!");
+    } else if (tAssets == '') {
+		alert("Field total assets cannot be empty!");
+	} else if (tLiabilities == '') {
+     		alert("Field t. liabilities cannot be empty!");
     } else if (equity == '') {
-		alert("Field financeCost cannot be empty!");
-	} else {
+     		alert("Field equity cannot be empty!");
+    } else {
 		var quarter = {
 			"name" : name,
 			"tickerSymbol" : tickerSymbol,
@@ -34,7 +40,9 @@ function addQuarterlyData() {
 			"revenue" : revenue,
 			"equity" : equity,
 			"netProfit" : netProfit,
-			"notes" : notes
+			"notes" : notes,
+			"totalAssets": tAssets,
+			"totalLiabilities": tLiabilities
 		};
 
 		jQuery.ajax({

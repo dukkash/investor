@@ -6,7 +6,7 @@
     <meta name="description" content="dashboard">
     <meta name="author" content="dukkash">
 
-    <title>Investor - BIST Companies</title>
+    <title>Investor - Indicators</title>
 
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/dashboard.css" rel="stylesheet">
@@ -40,10 +40,10 @@
         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="/investor/index.html">Overview</a>
+                    <a class="nav-link active" href="/investor/index.html">Overview <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link active" href="/investor/companies.html?exchange=TR">Companies<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/investor/companies.html?exchange=TR">Companies</a>
                 </li>
             </ul>
 
@@ -53,6 +53,18 @@
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/investor/addQuarterlyData.html">Add Quarterly Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/investor/addShortQuarterlyData.html">Add <b>Short</b> Quarterly Data</a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/investor/addTransaction.html">Add Transaction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/investor/transactions.html">All Transactions</a>
                 </li>
             </ul>
         </nav>
@@ -67,15 +79,18 @@
                         <tr>
                             <th style="text-align: LEFT;" >Name</th>
                             <th style="text-align: right;" >Buy ind.</th>
-                            <th style="text-align: right;" >P/E(2Q)</th>
+                            <th style="text-align: right;" >P/E(Last 2Q)</th>
                             <th style="text-align: right;" >P/E(4Q)</th>
                             <th style="text-align: right;" >P/BV</th>
-                            <th style="text-align: right;" >Price</th>
                             <th style="text-align: right;" >Market Cap.</th>
                             <th style="text-align: right;" >Equity</th>
-                            <th style="text-align: right;" >T. Debt</th>
-                            <th style="text-align: right;" >Work. Capital</th>
-                            <th style="text-align: right;" >Net Cash</th>
+                            <th style="text-align: right;" >Price</th>
+                            <th style="text-align: right;" >Price()</th>
+                            <th style="text-align: right;" >P/E(Next 1Y)Exp.</th>
+                            <th style="text-align: right;" >P/E(Next 2Y)Exp.</th>
+                            <th style="text-align: right;" >P/E(Next 5Y)Exp.</th>
+                            <th style="text-align: right;" >P/E(Next 10Y)Exp.</th>
+                            <th style="text-align: right;" >P/E(Next 15Y)Exp.</th>
                             <th ></th>
                         </tr>
                     </thead>
@@ -89,7 +104,7 @@
 <script src="js/jquery-3.2.1.js"></script>
 <script src="js/popper.js"></script>
 <script src="js/bootstrap.js"></script>
-<script src="js/companies.js"></script>
+<script src="js/companies-indicators.js"></script>
 <script src="js/search.js"></script>
 
 </body>

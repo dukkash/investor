@@ -72,7 +72,7 @@ public class CompanyRepository {
 
 	public List<Company> getAllCalculatedExcept(Country country) {
 		return (List<Company>) hibernateUtil.getSession().createCriteria(Company.class)
-				.add(Restrictions.not(Restrictions.eq("country", country))).list();
+				.add(Restrictions.ne("country", country)).list();
 	}
 
     public Company getCompanyByName(String name) {

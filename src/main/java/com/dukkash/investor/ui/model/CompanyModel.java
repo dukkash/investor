@@ -11,21 +11,30 @@ public class CompanyModel {
 	private Integer sector;
 	private BigDecimal price;
 	private String stockUrl;
-	private BigDecimal priceEarning;
+	private BigDecimal priceEarning; // last 4Q
+	private BigDecimal lastTwoQuartersPE; // last 2Q
 	private BigDecimal priceBook;
 	private BigDecimal equity;
 	private BigDecimal marketCap;
 	private BigDecimal workingCapital;
 	private BigDecimal cash;
 	private BigDecimal totalDebt;
-	private BigDecimal buyIndicator; // below 22.5 is good it is P/E * P/BV
+	private BigDecimal buyIndicator; // below 22.5 is good, it is P/E * P/BV
 	private BigDecimal sharesOutstanding;
 	private String nextEarningsDate;
 
 	public CompanyModel() {
 	}
 
-    public String getNextEarningsDate() {
+	public BigDecimal getLastTwoQuartersPE() {
+		return lastTwoQuartersPE;
+	}
+
+	public void setLastTwoQuartersPE(BigDecimal lastTwoQuartersPE) {
+		this.lastTwoQuartersPE = lastTwoQuartersPE;
+	}
+
+	public String getNextEarningsDate() {
         return nextEarningsDate;
     }
 

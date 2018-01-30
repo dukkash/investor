@@ -37,7 +37,7 @@ function addCompanyToTable(data) {
 	} else {
 	   tableRow += "<td align='left' style='color:green;'><a href='/investor/company.html?symbol=" + data.tickerSymbol +"'>" +  data.tickerSymbol + " - " + data.name + "</a></td>";
 	}
-	
+
 	if(data.buyIndicator > 22.5) {
 		tableRow += "<td align='right' style='color:red;'>" + data.buyIndicator + "</td><td align='right'>";
 	} else if(data.buyIndicator > 0 ) {

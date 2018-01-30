@@ -40,19 +40,34 @@
         <nav class="col-sm-3 col-md-2 d-none d-sm-block bg-light sidebar">
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link" href="/investor/index.html">Overview</a>
+                    <a class="nav-link active" href="/investor/index.html">Overview <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/investor/companies.html?exchange=TR">Companies</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/investor/companiesQuickView.html?exchange=TR">Companies</a>
                 </li>
             </ul>
 
             <ul class="nav nav-pills flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="/investor/addCompany.html">Add Company <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/investor/addCompany.html">Add Company</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/investor/addQuarterlyData.html">Add Quarterly Data</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/investor/addShortQuarterlyData.html">Add <b>Short</b> Quarterly Data</a>
+                </li>
+            </ul>
+
+            <ul class="nav nav-pills flex-column">
+                <li class="nav-item">
+                    <a class="nav-link" href="/investor/addTransaction.html">Add Transaction</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/investor/transactions.html">All Transactions</a>
                 </li>
             </ul>
         </nav>
@@ -93,8 +108,8 @@
                         <label class="col-md-4 control-label" for="isdebit">Is Debit</label>
                         <div class="col-md-5">
                             <select data-header="isdebit" id="isdebit" name="isdebit" class="form-control input-md">
-                                <option value="0">DEBIT</option>
                                 <option value="1">CREDIT</option>
+                                <option value="0">DEBIT</option>
                             </select>
                         </div>
                     </div>
@@ -119,7 +134,7 @@
                         <div class="col-md-8">
                             <button id="add-trans-btn" name="add-trans-btn" class="btn btn-success">ADD TRANSACTION
                             </button>
-                            <button id="reset-trans-btn" name="reset-trans-btn" class="btn btn-danger">RESET</button>
+                            <button id="reset-trans-btn" name="reset-trans-btn" type="reset" class="btn btn-danger">RESET</button>
                         </div>
                     </div>
                 </form>

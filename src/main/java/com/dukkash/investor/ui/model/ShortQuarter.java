@@ -9,6 +9,8 @@ public class ShortQuarter {
     private BigDecimal revenue;
     private BigDecimal equity;
     private BigDecimal netProfit;
+    private BigDecimal totalAssets;
+    private  BigDecimal totalLiabilities;
     private String notes;
 
     public ShortQuarter() {}
@@ -63,6 +65,22 @@ public class ShortQuarter {
 
     public String getNotes() {
         return notes;
+    }
+
+    public BigDecimal getTotalAssets() {
+        return totalAssets;
+    }
+
+    public void setTotalAssets(BigDecimal totalAssets) {
+        this.totalAssets = totalAssets;
+    }
+
+    public BigDecimal getTotalLiabilities() {
+        return totalLiabilities;
+    }
+
+    public void setTotalLiabilities(BigDecimal totalLiabilities) {
+        this.totalLiabilities = totalLiabilities;
     }
 
     public void setNotes(String notes) {

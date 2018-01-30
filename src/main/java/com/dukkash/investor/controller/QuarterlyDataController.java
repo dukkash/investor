@@ -50,6 +50,8 @@ public class QuarterlyDataController {
             BalanceSheet bSheet = new BalanceSheet();
             qData.setBalanceSheet(bSheet);
             bSheet.setEquity(shortQuarter.getEquity());
+            bSheet.setTotalAssets(shortQuarter.getTotalAssets());
+            bSheet.setTotalLiabilities(shortQuarter.getTotalLiabilities());
             bSheet.setQuarterlyData(qData);
 
             IncomeStatement iStat = new IncomeStatement();

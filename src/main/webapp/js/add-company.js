@@ -71,7 +71,7 @@ function addCompany() {
 	var country = $('#country').val();
     var stockUrl = $('#stock-url').val();
     var nextEarningsDate = $('#next-earnings-date').val();
-    var sharesOutstanding = $('#shares-outstanding').val();
+    var sharesOutstanding = $('#shares-outstanding').val().replace(/[,|.]/g, '').trim();
 
 	if (tickerSymbol == '' || country == '0' || price == '' || sharesOutstanding == ''
 			|| name == '' || sector == '0' || stockUrl == '') {

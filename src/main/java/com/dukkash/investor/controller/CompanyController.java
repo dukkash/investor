@@ -43,6 +43,15 @@ public class CompanyController {
     @Autowired
     private InvestorService investorService;
 
+	@RequestMapping(value = "/getCompaniesDetailed", method = RequestMethod.GET)
+	public List<CompanyModel> getCompaniesDetailed(@RequestParam String countryCode) {
+		List<CompanyModel> countries = companyService.getCompaniesDetailed(countryCode);
+
+
+		return countries;
+	}
+
+
 	@RequestMapping(value = "/addEstimation", method = RequestMethod.POST)
 	public ResponseEntity<String> addEstimation(@RequestBody EstimateModel model) {
 		Company company = companyService.getCompanyByTickerSymbol(model.getTickerSymbol());
@@ -76,22 +85,24 @@ public class CompanyController {
 
         return elements;
     }
-	
+
 	@RequestMapping(value = "/getAll", method = RequestMethod.GET)
 	public List<CompanyModel> getAllCompanies(@RequestParam String countryCode) {
-        Exchange exchange = investorService.getExchangeByCountryCode(countryCode);
-        List<CompanyModel> countries;
+		Exchange exchange = investorService.getExchangeByCountryCode(countryCode);
+		List<CompanyModel> countries;
 
-        if(countryCode.equals("TR")) {
-            countries = companyService.getAllCalculated(exchange.getCountry());
-        } else {
-            countries = companyService.getAllCalculatedExcept(exchange.getCountry());
-        }
+		if(countryCode.equals("TR")) {
+			countries = companyService.getAllCalculated(exchange.getCountry());
+		} else {
+            exchange = investorService.getExchangeByCountryCode("TR");
+			countries = companyService.getAllCalculatedExclude(exchange.getCountry());
+		}
 
-        countries = countries.stream().sorted((a, b)-> a.getBuyIndicator().compareTo(b.getBuyIndicator())).collect(Collectors.toList());
+		countries = countries.stream().sorted((a, b)-> a.getBuyIndicator().compareTo(b.getBuyIndicator())).collect(Collectors.toList());
 		System.out.println("Companies retrieved by the controller: " + countries.size());
 		return countries;
 	}
+
 
     @RequestMapping(value = "/getImportanceLevels", method = RequestMethod.GET)
     public List<ImportanceLevel> getImportanceLevels() {
