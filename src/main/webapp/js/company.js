@@ -34,15 +34,15 @@ $(document).ready(function() {
 });
 
 function getQuarterData(data) {
-	var tableRow = "<tr>";
-	
-	tableRow += "</tr><tr>";
-	
-	for (i = 0; i < data.length+1; i++) {
-		tableRow += "<td align='right'></td>";
-	}
+	var tableRow = "";
 
-	tableRow += "</tr><tr><td><b>BALANCE SHEET</b></td></tr><tr>";
+	tableRow += "<tr><td><b>Ratios</b></td></tr><tr>";
+
+	for (i = 0; i < data.length+1; i++) {
+    	tableRow += "<td align='right'></td>";
+    }
+
+	tableRow += "<tr><td><b>BALANCE SHEET</b></td></tr><tr>";
 	
 	for (i = 0; i < data.length+1; i++) {
 		tableRow += "<td align='right'></td>";

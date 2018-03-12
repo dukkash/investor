@@ -19,7 +19,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity(name = "quarterly_data")
-public class QuarterlyData implements Serializable {
+public class Period implements Serializable {
 
 	@Id
 	@GeneratedValue(generator = "increment")

@@ -24,7 +24,7 @@ public class CashFlow {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "q_data_id", referencedColumnName = "ID")
-	private QuarterlyData quarterlyData;
+	private Period quarterlyData;
 
 	@Column(name = "operating_activities_cash")
 	private BigDecimal operatingActivitiesCash;
@@ -76,11 +76,11 @@ public class CashFlow {
 		this.id = id;
 	}
 
-	public QuarterlyData getQuarterlyData() {
+	public Period getQuarterlyData() {
 		return quarterlyData;
 	}
 
-	public void setQuarterlyData(QuarterlyData quarterlyData) {
+	public void setQuarterlyData(Period quarterlyData) {
 		this.quarterlyData = quarterlyData;
 	}
 

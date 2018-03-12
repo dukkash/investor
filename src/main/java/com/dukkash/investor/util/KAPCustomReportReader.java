@@ -22,9 +22,9 @@ import com.dukkash.investor.model.BalanceSheet;
 import com.dukkash.investor.model.CashFlow;
 import com.dukkash.investor.model.Company;
 import com.dukkash.investor.model.IncomeStatement;
-import com.dukkash.investor.model.QuarterlyData;
+import com.dukkash.investor.model.Period;
 import com.dukkash.investor.service.CompanyService;
-import com.dukkash.investor.service.QuarterlyDataService;
+import com.dukkash.investor.service.PeriodService;
 
 @Component
 public class KAPCustomReportReader {
@@ -39,9 +39,9 @@ public class KAPCustomReportReader {
 	private CompanyService companyService;
 
 	@Autowired
-	private QuarterlyDataService quarterlyDataService;
+	private PeriodService quarterlyDataService;
 
-	private List<QuarterlyData> quarters;
+	private List<Period> quarters;
 
 	public void parseQuarterlyFinancialReport(String fileName) {
 
@@ -67,7 +67,7 @@ public class KAPCustomReportReader {
 	}
 
 	private void validateData() throws Exception {
-		for (QuarterlyData qd : quarters) {
+		for (Period qd : quarters) {
 			if(qd.getBalanceSheet().getTotalAssets() == null) {
 				throw new Exception("Missing total assets for " + qd.getName());
 			} else if(qd.getBalanceSheet().getTotalCurrentAssets() == null) {
@@ -85,11 +85,11 @@ public class KAPCustomReportReader {
 	}
 
 	private void normalizeEarnings() {
-		Map<String, List<QuarterlyData>> years = new HashMap<>();
+		Map<String, List<Period>> years = new HashMap<>();
 
-		for (QuarterlyData qd : quarters) {
+		for (Period qd : quarters) {
 			String quarterYear = qd.getName().substring(0, 4);
-			List<QuarterlyData> temp = years.get(quarterYear);
+			List<Period> temp = years.get(quarterYear);
 
 			if (temp == null) {
 				temp = new ArrayList<>();
@@ -101,21 +101,21 @@ public class KAPCustomReportReader {
 		}
 
 		for (String data : years.keySet()) {
-			List<QuarterlyData> temp = years.get(data);
+			List<Period> temp = years.get(data);
 			temp = temp.stream().sorted((o1, o2) -> o2.getName().compareTo(o1.getName())).collect(Collectors.toList());
 			years.put(data, temp);
 		}
 
 		for (String data : years.keySet()) {
-			List<QuarterlyData> temp = years.get(data);
+			List<Period> temp = years.get(data);
 
 			if (temp.size() == 1) {
 				continue;
 			}
 
 			for (int i = 1; i < temp.size(); i++) {
-				QuarterlyData upper = temp.get(i - 1);
-				QuarterlyData lower = temp.get(i);
+				Period upper = temp.get(i - 1);
+				Period lower = temp.get(i);
 
 				updateQuarterEarning(upper, lower);
 			}
@@ -123,7 +123,7 @@ public class KAPCustomReportReader {
 		System.out.println(23);
 	}
 
-	private void updateQuarterEarning(QuarterlyData upper, QuarterlyData lower) {
+	private void updateQuarterEarning(Period upper, Period lower) {
 		IncomeStatement ui = upper.getIncomeStatement();
 		IncomeStatement li = lower.getIncomeStatement();
 
@@ -172,8 +172,8 @@ public class KAPCustomReportReader {
 		}
 	}
 
-	private List<QuarterlyData> getQuarters(Iterator<Row> iterator) throws Exception {
-		List<QuarterlyData> quarters = new ArrayList<>();
+	private List<Period> getQuarters(Iterator<Row> iterator) throws Exception {
+		List<Period> quarters = new ArrayList<>();
 		Company company = null;
 		BigDecimal totalShares = null;
 
@@ -231,7 +231,7 @@ public class KAPCustomReportReader {
 			}
 
 			while (cellIterator.hasNext()) {
-				QuarterlyData qData = new QuarterlyData();
+				Period qData = new Period();
 				BalanceSheet bs = new BalanceSheet();
 				IncomeStatement is = new IncomeStatement();
 				CashFlow cf = new CashFlow();
@@ -261,7 +261,7 @@ public class KAPCustomReportReader {
 		int rowCounter = 0;
 		int index = 0;
 
-		for (QuarterlyData q : quarters) {
+		for (Period q : quarters) {
 			q.getBalanceSheet().setTotalDebt(new BigDecimal(0));
 			q.getCashFlow().setDebtPayments(new BigDecimal(0));
 			q.getCashFlow().setDebtIssued(new BigDecimal(0));

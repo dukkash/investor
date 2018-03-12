@@ -1,6 +1,5 @@
 package com.dukkash.investor.model;
 
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -49,7 +48,7 @@ public class Company {
 	private Date nextEarningsDate;
 
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "company")
-	private List<QuarterlyData> quarterlyData;
+	private List<Period> quarterlyData;
 
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "analysed_level_id", referencedColumnName = "ID")
@@ -154,11 +153,11 @@ public class Company {
 		this.about = about;
 	}
 
-	public List<QuarterlyData> getQuarterlyData() {
+	public List<Period> getQuarterlyData() {
 		return quarterlyData;
 	}
 
-	public void setQuarterlyData(List<QuarterlyData> quarterlyData) {
+	public void setQuarterlyData(List<Period> quarterlyData) {
 		this.quarterlyData = quarterlyData;
 	}
 }

@@ -3,13 +3,11 @@ package com.dukkash.investor.util;
 import com.dukkash.investor.model.BalanceSheet;
 import com.dukkash.investor.model.CashFlow;
 import com.dukkash.investor.model.IncomeStatement;
-import com.dukkash.investor.model.QuarterlyData;
+import com.dukkash.investor.model.Period;
 import com.dukkash.investor.service.CompanyService;
-import com.dukkash.investor.service.QuarterlyDataService;
+import com.dukkash.investor.service.PeriodService;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
-import org.jsoup.Jsoup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -21,9 +19,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.net.URL;
 import java.net.URLConnection;
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -39,7 +35,7 @@ public class XSLUtil {
 	private CompanyService companyService;
 
 	@Autowired
-	private QuarterlyDataService quarterlyDataService;
+	private PeriodService quarterlyDataService;
 
 	public void parseData() throws IOException {
 		TrustManager[] trustAllCerts = new TrustManager[] { new X509TrustManager() {
@@ -87,7 +83,7 @@ public class XSLUtil {
 	public void parseBankQuarterlyFinancialReport(String symbol, String fileName, BigDecimal multiplier,
 			String quarterName, String earningDate, BigDecimal sharesOuts) {
 		this.multiplier = multiplier;
-		QuarterlyData qData = new QuarterlyData();
+		Period qData = new Period();
 
 		try {
 			FileInputStream excelFile = new FileInputStream(new File(fileName));
@@ -100,7 +96,7 @@ public class XSLUtil {
 			qData.setSharesOutstanding(sharesOuts);
 			qData.setCompany(companyService.getCompanyByTickerSymbol(symbol));
 
-			QuarterlyData d = quarterlyDataService.getByNameAndCompany(qData.getName(), qData.getCompany());
+			Period d = quarterlyDataService.getByNameAndCompany(qData.getName(), qData.getCompany());
 
 			if (d != null) {
 				throw new Exception("QuarterlyData already exist!");
@@ -121,7 +117,7 @@ public class XSLUtil {
 		System.out.println(qData);
 	}
 
-	private void validateBankResult(QuarterlyData qData) throws Exception {
+	private void validateBankResult(Period qData) throws Exception {
 		BalanceSheet bs = qData.getBalanceSheet();
 		IncomeStatement is = qData.getIncomeStatement();
 		CashFlow cf = qData.getCashFlow();
@@ -172,7 +168,7 @@ public class XSLUtil {
 		}
 	}
 
-	private void readBankFinancialReport(Iterator<Row> iterator, QuarterlyData qData) {
+	private void readBankFinancialReport(Iterator<Row> iterator, Period qData) {
 		BalanceSheet bs = new BalanceSheet();
 		IncomeStatement is = new IncomeStatement();
 		CashFlow cf = new CashFlow();
@@ -278,7 +274,7 @@ public class XSLUtil {
 	public void parseQuarterlyFinancialReport(String symbol, String fileName, BigDecimal multiplier, String quarterName,
 			String earningDate, BigDecimal sharesOuts) {
 		this.multiplier = multiplier;
-		QuarterlyData qData = new QuarterlyData();
+		Period qData = new Period();
 		try {
 			FileInputStream excelFile = new FileInputStream(new File(fileName));
 			Workbook workbook = new HSSFWorkbook(excelFile);
@@ -290,7 +286,7 @@ public class XSLUtil {
 			qData.setSharesOutstanding(sharesOuts);
 			qData.setCompany(companyService.getCompanyByTickerSymbol(symbol));
 
-			QuarterlyData d = quarterlyDataService.getByNameAndCompany(qData.getName(), qData.getCompany());
+			Period d = quarterlyDataService.getByNameAndCompany(qData.getName(), qData.getCompany());
 
 			if (d != null) {
 				throw new Exception("QuarterlyData already exist!");
@@ -311,7 +307,7 @@ public class XSLUtil {
 		System.out.println(qData);
 	}
 
-	private void validateResult(QuarterlyData qData) throws Exception {
+	private void validateResult(Period qData) throws Exception {
 		BalanceSheet bs = qData.getBalanceSheet();
 		IncomeStatement is = qData.getIncomeStatement();
 		CashFlow cf = qData.getCashFlow();
@@ -370,7 +366,7 @@ public class XSLUtil {
 		}
 	}
 
-	private void readFinancialReport(Iterator<Row> iterator, QuarterlyData qData) throws Exception {
+	private void readFinancialReport(Iterator<Row> iterator, Period qData) throws Exception {
 		BalanceSheet bs = new BalanceSheet();
 		IncomeStatement is = new IncomeStatement();
 		CashFlow cf = new CashFlow();
@@ -695,7 +691,7 @@ public class XSLUtil {
 		return new BigDecimal(0);
 	}
 
-	private void parseSheet(Iterator<Row> iterator, QuarterlyData qData) {
+	private void parseSheet(Iterator<Row> iterator, Period qData) {
 		BalanceSheet bs = new BalanceSheet();
 		IncomeStatement is = new IncomeStatement();
 		CashFlow cf = new CashFlow();

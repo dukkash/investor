@@ -1,12 +1,7 @@
 package com.dukkash.investor.controller;
 
-import java.math.BigDecimal;
-
-import javax.validation.ValidationException;
-
 import com.dukkash.investor.exception.InvestorException;
 import com.dukkash.investor.model.*;
-import com.dukkash.investor.ui.model.ShortQuarter;
 import com.dukkash.investor.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,65 +12,25 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.dukkash.investor.service.CompanyService;
-import com.dukkash.investor.service.QuarterlyDataService;
-import com.dukkash.investor.ui.model.QuarterlyDataModel;
-import com.dukkash.investor.validator.QuarterlyDataValidator;
+import com.dukkash.investor.service.PeriodService;
+import com.dukkash.investor.ui.model.PeriodModel;
 
 @RestController
-@RequestMapping("/quarterlyData")
-public class QuarterlyDataController {
+@RequestMapping("/period")
+public class PeriodController {
 
 	@Autowired
 	private CompanyService companyService;
 
 	@Autowired
-	private QuarterlyDataService quarterlyDataService;
+	private PeriodService periodService;
 
-    @RequestMapping(value = "/addShortQuarterlyData", method = RequestMethod.POST)
-    public ResponseEntity<String> addShortQuarterlyData(@RequestBody ShortQuarter shortQuarter) {
-        QuarterlyData qData = new QuarterlyData();
-
-        try {
-            Company company = companyService.getCompanyByTickerSymbol(shortQuarter.getTickerSymbol().trim().toUpperCase());
-
-            if(company == null) {
-                throw new InvestorException("Company missing. " +  shortQuarter.getTickerSymbol());
-            }
-
-            qData.setCompany(company);
-            qData.setName(shortQuarter.getName());
-            qData.setNotes(shortQuarter.getNotes());
-            qData.setSharesOutstanding(shortQuarter.getShares());
-
-            BalanceSheet bSheet = new BalanceSheet();
-            qData.setBalanceSheet(bSheet);
-            bSheet.setEquity(shortQuarter.getEquity());
-            bSheet.setTotalAssets(shortQuarter.getTotalAssets());
-            bSheet.setTotalLiabilities(shortQuarter.getTotalLiabilities());
-            bSheet.setQuarterlyData(qData);
-
-            IncomeStatement iStat = new IncomeStatement();
-            qData.setIncomeStatement(iStat);
-            iStat.setRevenue(shortQuarter.getRevenue());
-            iStat.setNetProfit(shortQuarter.getNetProfit());
-            iStat.setQuarterlyData(qData);
-        } catch (InvestorException e) {
-            return new ResponseEntity<>(HttpStatus.PRECONDITION_FAILED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-        }
-
-        quarterlyDataService.save(qData);
-
-        return new ResponseEntity<>(HttpStatus.OK);
-    }
-
-	@RequestMapping(value = "/addQuarterlyData", method = RequestMethod.POST)
-	public ResponseEntity<String> addQuarterlyData(@RequestBody QuarterlyDataModel model) {
-		QuarterlyData qData = new QuarterlyData();
+	@RequestMapping(value = "/addPeriod", method = RequestMethod.POST)
+	public ResponseEntity<String> addQuarterlyData(@RequestBody PeriodModel model) {
+		Period qData = new Period();
 
         try {
-            populateQuarterlyData(model, qData);
+            populatePeriodData(model, qData);
 
             BalanceSheet bSheet = new BalanceSheet();
             qData.setBalanceSheet(bSheet);
@@ -97,11 +52,11 @@ public class QuarterlyDataController {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
 
-		quarterlyDataService.save(qData);
+        periodService.save(qData);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 
-    private void populateCashFlow(QuarterlyDataModel model, CashFlow cFlow) {
+    private void populateCashFlow(PeriodModel model, CashFlow cFlow) {
         if(model.getDebtIssued() != null) {
             cFlow.setDebtIssued(model.getDebtIssued());
         }
@@ -129,7 +84,7 @@ public class QuarterlyDataController {
         cFlow.setLiquidity(model.getLiquidity());
     }
 
-    private void populateIncomeStatement(QuarterlyDataModel model, IncomeStatement iStat) {
+    private void populateIncomeStatement(PeriodModel model, IncomeStatement iStat) {
         iStat.setRevenue(model.getRevenue());
         iStat.setGrossProfit(model.getGrossProfit());
         iStat.setCostOfSales(iStat.getRevenue().subtract(iStat.getGrossProfit()));
@@ -153,7 +108,7 @@ public class QuarterlyDataController {
         iStat.setFinanceCost(model.getFinanceCost());
     }
 
-    private void populateBalanceSheet(QuarterlyDataModel model, BalanceSheet bSheet) {
+    private void populateBalanceSheet(PeriodModel model, BalanceSheet bSheet) {
         bSheet.setTotalAssets(model.getTotalAssets());
         bSheet.setTotalLiabilities(model.getTotalLiabilities());
         bSheet.setTotalCurrentAssets(model.getCurrentAssets());
@@ -191,7 +146,7 @@ public class QuarterlyDataController {
         bSheet.setIntangibleAssets(model.getIntangibleAssets());
     }
 
-    private void populateQuarterlyData(QuarterlyDataModel model, QuarterlyData qData) throws InvestorException {
+    private void populatePeriodData(PeriodModel model, Period qData) throws InvestorException {
         Company company = companyService.getCompanyByTickerSymbol(model.getTickerSymbol().trim().toUpperCase());
 
         if(company == null) {

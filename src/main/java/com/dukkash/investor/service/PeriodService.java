@@ -8,29 +8,29 @@ import com.dukkash.investor.model.Company;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.dukkash.investor.model.QuarterlyData;
-import com.dukkash.investor.repository.QuarterlyDataRepository;
+import com.dukkash.investor.model.Period;
+import com.dukkash.investor.repository.PeriodRepository;
 
 @Service
 @Transactional
-public class QuarterlyDataService {
+public class PeriodService {
 
 	@Autowired
-	private QuarterlyDataRepository quarterlyDataRepository;
+	private PeriodRepository quarterlyDataRepository;
 
-	public void save(List<QuarterlyData> entities) {
+	public void save(List<Period> entities) {
 		quarterlyDataRepository.save(entities);
 	}
 
-	public void save(QuarterlyData entity) {
+	public void save(Period entity) {
 		quarterlyDataRepository.save(entity);
 	}
 
-	public QuarterlyData getByNameAndCompany(String name, Company company) {
+	public Period getByNameAndCompany(String name, Company company) {
 		return quarterlyDataRepository.getByNameAndCompany(name, company);
 	}
 
-	public List<QuarterlyData> getCompanyData(Company company) {
+	public List<Period> getCompanyData(Company company) {
 		return quarterlyDataRepository.getCompanyData(company);
 	}
 }

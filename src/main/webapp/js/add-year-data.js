@@ -1,12 +1,12 @@
 $(document).ready(function() {
-	$("#add-quarter-btn").click(function(e) {
+	$("#add-data-btn").click(function(e) {
 		e.preventDefault();
-		addQuarterlyData();
+		addPeriod();
 	});
-	
+
 });
 
-function addQuarterlyData() {
+function addPeriod() {
 
 	var name = $('#name').val().trim();
 	var tickerSymbol = $('#ticker-symbol').val().trim();
@@ -145,21 +145,19 @@ function addQuarterlyData() {
 		};
 
 		jQuery.ajax({
-					url : "/investor/quarterlyData/addQuarterlyData",
+					url : "/investor/period/addYearData",
 					type : "POST",
 					data : JSON.stringify(quarter),
 					dataType : "json",
 					contentType : "application/json; charset=utf-8",
 					complete : function(data) {
 						if (data.status == 200) {
-							alert("The quarterly data was added successfully.");
+							alert("The period data was added successfully.");
 						//	cleanFileds();
 						} else {
 							alert("Error code: " + data.status + " returned.");
 						}
 					}
 				});
-
 	}
-
 }

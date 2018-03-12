@@ -2,22 +2,21 @@ package com.dukkash.investor.util;
 
 import com.dukkash.investor.model.Company;
 import com.dukkash.investor.model.IncomeStatement;
-import com.dukkash.investor.model.QuarterlyData;
+import com.dukkash.investor.model.Period;
 import com.dukkash.investor.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import com.dukkash.investor.service.QuarterlyDataService;
+import com.dukkash.investor.service.PeriodService;
 
 import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Component
 @Transactional
 public class InvestorUtil {
 
     @Autowired
-    private QuarterlyDataService quarterlyDataService;
+    private PeriodService quarterlyDataService;
 
     @Autowired
     private CompanyService companyService;
@@ -31,10 +30,10 @@ public class InvestorUtil {
         Company company = companyService.getCompanyByTickerSymbol(tickerSymbol);
         System.out.println(company.getQuarterlyData().size());
 
-        QuarterlyData q1=null,q2=null,q3=null,q4=null;
+        Period q1=null,q2=null,q3=null,q4=null;
         int quarters = 0;
 
-        for(QuarterlyData temp: company.getQuarterlyData()) {
+        for(Period temp: company.getQuarterlyData()) {
             if(temp.getName().equals(Q1)) {
                 q1 = temp;
                 quarters++;
@@ -63,7 +62,7 @@ public class InvestorUtil {
         }
     }
 
-    private void distractQuarter(QuarterlyData smaller, QuarterlyData bigger) {
+    private void distractQuarter(Period smaller, Period bigger) {
         IncomeStatement isBig = bigger.getIncomeStatement();
         IncomeStatement isSmall = smaller.getIncomeStatement();
 

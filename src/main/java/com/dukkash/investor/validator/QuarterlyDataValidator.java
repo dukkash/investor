@@ -2,11 +2,11 @@ package com.dukkash.investor.validator;
 
 import javax.validation.ValidationException;
 
-import com.dukkash.investor.ui.model.QuarterlyDataModel;
+import com.dukkash.investor.ui.model.PeriodModel;
 
 public class QuarterlyDataValidator {
 
-	public void validateShorQuarterlyDataModel(QuarterlyDataModel model) throws ValidationException {
+	public void validateShorQuarterlyDataModel(PeriodModel model) throws ValidationException {
 
 		if (model.getName() == null || model.getName().equals("")) {
 			throw new ValidationException("Quarterly Data name is required field.");

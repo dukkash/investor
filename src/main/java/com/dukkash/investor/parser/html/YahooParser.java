@@ -2,7 +2,6 @@ package com.dukkash.investor.parser.html;
 
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -12,7 +11,7 @@ import org.json.JSONObject;
 import org.jsoup.Jsoup;
 
 import com.dukkash.investor.model.Company;
-import com.dukkash.investor.model.QuarterlyData;
+import com.dukkash.investor.model.Period;
 import com.dukkash.investor.model.BalanceSheet;
 import com.dukkash.investor.model.IncomeStatement;
 
@@ -97,7 +96,7 @@ public class YahooParser {
 	}
 
 	public void addQuarterlyData(JSONObject qJSON, Company company, JSONObject earnings ) {
-		QuarterlyData qData = new QuarterlyData();
+		Period qData = new Period();
 		qData.setCompany(company);
 
 		BalanceSheet qb1 = new BalanceSheet();

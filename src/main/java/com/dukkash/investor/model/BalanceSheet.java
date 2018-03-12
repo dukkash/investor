@@ -19,7 +19,7 @@ public class BalanceSheet implements Serializable {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "q_data_id", referencedColumnName = "ID")
-	private QuarterlyData quarterlyData;
+	private Period quarterlyData;
 
 	@Column(name = "total_assets")
 	private BigDecimal totalAssets;
@@ -156,11 +156,11 @@ public class BalanceSheet implements Serializable {
 		this.id = id;
 	}
 
-	public QuarterlyData getQuarterlyData() {
+	public Period getQuarterlyData() {
 		return quarterlyData;
 	}
 
-	public void setQuarterlyData(QuarterlyData quarterlyData) {
+	public void setQuarterlyData(Period quarterlyData) {
 		this.quarterlyData = quarterlyData;
 	}
 

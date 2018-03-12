@@ -3,7 +3,7 @@ package com.dukkash.investor.util;
 import com.dukkash.investor.model.BalanceSheet;
 import com.dukkash.investor.model.CashFlow;
 import com.dukkash.investor.model.IncomeStatement;
-import com.dukkash.investor.model.QuarterlyData;
+import com.dukkash.investor.model.Period;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -15,10 +15,10 @@ public class CSVUtil {
         String line = null;
         String[] tokens;
 
-        QuarterlyData q1 = initQuarter();
-        QuarterlyData q2 = initQuarter();
-        QuarterlyData q3 = initQuarter();
-        QuarterlyData q4 = initQuarter();
+        Period q1 = initQuarter();
+        Period q2 = initQuarter();
+        Period q3 = initQuarter();
+        Period q4 = initQuarter();
 
         line = reader.readLine();
         tokens = line.split(",");
@@ -89,8 +89,8 @@ public class CSVUtil {
         return "1";
     }
 
-    public QuarterlyData initQuarter() {
-        QuarterlyData q1 = new QuarterlyData();
+    public Period initQuarter() {
+        Period q1 = new Period();
         BalanceSheet bs = new BalanceSheet();
         IncomeStatement is = new IncomeStatement();
         CashFlow cf = new CashFlow();

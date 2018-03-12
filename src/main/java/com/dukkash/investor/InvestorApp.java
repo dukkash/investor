@@ -1,11 +1,9 @@
 package com.dukkash.investor;
 
-import com.dukkash.investor.model.Company;
-import com.dukkash.investor.model.QuarterlyData;
 import com.dukkash.investor.parser.html.InvestingStocksParser;
+import com.dukkash.investor.parser.html.IsYatirimParser;
 import com.dukkash.investor.service.CompanyService;
-import com.dukkash.investor.service.CountryService;
-import com.dukkash.investor.service.QuarterlyDataService;
+import com.dukkash.investor.service.PeriodService;
 import com.dukkash.investor.util.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
@@ -14,21 +12,29 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import javax.sql.rowset.CachedRowSet;
+import java.util.Date;
 
 @Configuration
 @ComponentScan
 @EnableAutoConfiguration
 public class InvestorApp {
 
+    public static void maint(String[] args) throws Exception {
+        Date d = new Date();
+        System.out.println(d.getTime());
+    }
+
     public static void main(String[] args) throws Exception {
         ConfigurableApplicationContext ctx = SpringApplication.run(InvestorApp.class, args);
         XSLUtil parser = ctx.getBean(XSLUtil.class);
         InvestorUtil util = ctx.getBean(InvestorUtil.class);
         CompanyService companyService = ctx.getBean(CompanyService.class);
-        QuarterlyDataService qService = ctx.getBean(QuarterlyDataService.class);
-        InvestingStocksParser iparser = ctx.getBean(InvestingStocksParser.class);             
-
+        PeriodService qService = ctx.getBean(PeriodService.class);
+        InvestingStocksParser iparser = ctx.getBean(InvestingStocksParser.class);
+        IsYatirimParser isYatirimParser = ctx.getBean(IsYatirimParser.class);
         KAPCustomReportReader kapReader = ctx.getBean(KAPCustomReportReader.class);
+
+        isYatirimParser.parseCompany();
                 
       //  iparser.updateCompanyPricesOfBIST();
       //  kapReader.parseQuarterlyFinancialReport("D:\\doc\\investing\\KAP_REPORTS\\zoren.xls");

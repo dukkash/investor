@@ -14,7 +14,6 @@ import com.dukkash.investor.model.*;
 import com.dukkash.investor.parser.html.YahooParser;
 import com.dukkash.investor.repository.*;
 import com.dukkash.investor.ui.model.CompanyModel;
-import com.dukkash.investor.ui.model.EstimateModel;
 import com.dukkash.investor.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +37,7 @@ public class CompanyService {
     private InvestorRepository investorRepository;
 
     @Autowired
-    private QuarterlyDataRepository quarterlyDataRepository;
+    private PeriodRepository quarterlyDataRepository;
 
     public void save(Company entity) {
         companyRepository.save(entity);
@@ -64,7 +63,7 @@ public class CompanyService {
         companyRepository.saveOrUpdate(entity);
     }
 
-    public List<QuarterlyData> getDetailedCompanyByTickerSymbol(String tickerSymbol) {
+    public List<Period> getDetailedCompanyByTickerSymbol(String tickerSymbol) {
         Company company = companyRepository.getCompanyByTickerSymbol(tickerSymbol);
 
         if (company != null) {
@@ -88,7 +87,7 @@ public class CompanyService {
         List<CompanyModel> companyModels = new ArrayList<>();
 
         for (Company company : companies) {
-            List<QuarterlyData> qData = quarterlyDataRepository.getCompanyData(company);
+            List<Period> qData = quarterlyDataRepository.getCompanyData(company);
             CompanyModel temp = populateCompanyExtraFields(company, qData);
 
             if (temp != null) {
@@ -99,7 +98,7 @@ public class CompanyService {
         return companyModels;
     }
 
-    private CompanyModel populateCompanyExtraFields(Company company, List<QuarterlyData> qData) {
+    private CompanyModel populateCompanyExtraFields(Company company, List<Period> qData) {
         CompanyModel cModel = new CompanyModel();
         cModel.setName(company.getName());
         cModel.setTickerSymbol(company.getTickerSymbol());
@@ -111,9 +110,9 @@ public class CompanyService {
         }
 
         cModel.setId(company.getId());
-        qData = qData.stream().sorted(Comparator.comparing(QuarterlyData::getName)).collect(Collectors.toList());
+        qData = qData.stream().sorted(Comparator.comparing(Period::getName)).collect(Collectors.toList());
 
-        QuarterlyData lastQuarter = qData.get(qData.size() - 1);
+        Period lastQuarter = qData.get(qData.size() - 1);
         BigDecimal marketCap = company.getPrice().multiply(lastQuarter.getSharesOutstanding()).setScale(0, BigDecimal.ROUND_DOWN);
         cModel.setMarketCap(marketCap);
         cModel.setEquity(lastQuarter.getBalanceSheet().getEquity());

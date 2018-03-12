@@ -2,7 +2,7 @@ package com.dukkash.investor.ui.model;
 
 import java.math.BigDecimal;
 
-public class QuarterlyDataModel {
+public class PeriodModel {
 	private String name;
 	private String tickerSymbol;
 	private String earningsDate;
@@ -50,7 +50,7 @@ public class QuarterlyDataModel {
 	private BigDecimal interestPayments;
 	private String notes;
 
-	public QuarterlyDataModel() {
+	public PeriodModel() {
 	}
 
     public BigDecimal getFinanceIncome() {

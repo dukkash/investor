@@ -1,8 +1,6 @@
 package com.dukkash.investor.controller;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -10,11 +8,10 @@ import java.util.stream.Collectors;
 import com.dukkash.investor.model.*;
 import com.dukkash.investor.service.CompanyNoteService;
 import com.dukkash.investor.service.InvestorService;
-import com.dukkash.investor.service.QuarterlyDataService;
+import com.dukkash.investor.service.PeriodService;
 import com.dukkash.investor.ui.model.CompanyModel;
 import com.dukkash.investor.ui.model.CompanyNoteModel;
 import com.dukkash.investor.ui.model.EstimateModel;
-import com.dukkash.investor.ui.model.QuarterlyDataModel;
 import com.dukkash.investor.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -38,7 +35,7 @@ public class CompanyController {
     private CompanyNoteService companyNoteService;
 
 	@Autowired
-	private QuarterlyDataService quarterlyDataService;
+	private PeriodService quarterlyDataService;
 
     @Autowired
     private InvestorService investorService;
@@ -155,18 +152,18 @@ public class CompanyController {
 	}
 
 	@RequestMapping(value = "/getCompany", method = RequestMethod.GET)
-	public List<QuarterlyData> getCompany(@RequestParam String tickerSymbol) {
+	public List<Period> getCompany(@RequestParam String tickerSymbol) {
 		if(tickerSymbol == null || tickerSymbol.isEmpty()) {
 			return new ArrayList<>();
 		}
 
-		List<QuarterlyData> data = companyService.getDetailedCompanyByTickerSymbol(tickerSymbol);
+		List<Period> data = companyService.getDetailedCompanyByTickerSymbol(tickerSymbol);
 
-		for(QuarterlyData qd: data) {
-		    qd.setCompany(null);
-		    qd.getIncomeStatement().setQuarterlyData(null);
-		    qd.getCashFlow().setQuarterlyData(null);
-		    qd.getBalanceSheet().setQuarterlyData(null);
+		for(Period period: data) {
+			period.setCompany(null);
+			period.getIncomeStatement().setQuarterlyData(null);
+			period.getCashFlow().setQuarterlyData(null);
+			period.getBalanceSheet().setQuarterlyData(null);
         }
 		if(data == null) {
 			return new ArrayList<>();
